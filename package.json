@@ -15,7 +15,7 @@
     "doc.shopify": "node bin/graphdoc.js -c example.shopify.json -f -v",
     "doc.starwars": "node bin/graphdoc.js -c example.starWars.json -f -v",
     "doc.starwars-js": "node bin/graphdoc.js -c example.starWars-js.json -f -v",
-    "test": "jest"
+    "test": "./node_modules/.bin/jest"
   },
   "repository": {
     "type": "git",
