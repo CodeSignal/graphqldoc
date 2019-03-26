@@ -24,9 +24,9 @@ export default class RequireByPlugin extends Plugin implements PluginInterface {
     constructor(
         public document: Schema,
         public projectPackage: any,
-        public graphdocPackage: any,
+        public graphqldocPackage: any,
     ) {
-        super(document, projectPackage, graphdocPackage);
+        super(document, projectPackage, graphqldocPackage);
 
         this.requireBy = new Map();
 

@@ -7,10 +7,10 @@ import * as Bluebird from 'bluebird';
  * resolve
  *
  * transform a path relative to absolute, if relative
- * path start with `graphdoc/` return absolute path to
+ * path start with `graphqldoc/` return absolute path to
  * plugins directory
  */
-const MODULE_BASEPATH = 'graphdoc/';
+const MODULE_BASEPATH = 'graphqldoc/';
 
 export function resolve(relative: string): string {
 

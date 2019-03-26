@@ -1,20 +1,20 @@
 {
   "name": "graphqldoc",
-  "version": "1.0.0",
-  "description": "Static page generator for documenting GraphQL Schema",
-  "main": "bin/graphdoc",
+  "version": "2.4.1",
+  "description": "Generate GraphQL docs from schema.",
+  "main": "bin/graphqldoc",
   "bin": {
-    "graphdoc": "./bin/graphdoc.js"
+    "graphqldoc": "./bin/graphqldoc.js"
   },
   "scripts": {
     "sass": "node-sass --output-style compressed template/slds/styles/graphdoc.scss > template/slds/styles/graphdoc.css",
     "compile": "tsc -p .",
     "declaration": "tsc -d -p tsconfig.json",
-    "doc.github": "node bin/graphdoc.js -c example.github.json -f -v",
-    "doc.pokemon": "node bin/graphdoc.js -c example.pokemon.json -f -v",
-    "doc.shopify": "node bin/graphdoc.js -c example.shopify.json -f -v",
-    "doc.starwars": "node bin/graphdoc.js -c example.starWars.json -f -v",
-    "doc.starwars-js": "node bin/graphdoc.js -c example.starWars-js.json -f -v",
+    "doc.github": "node bin/graphqldoc.js -c example.github.json -f -v",
+    "doc.pokemon": "node bin/graphqldoc.js -c example.pokemon.json -f -v",
+    "doc.shopify": "node bin/graphqldoc.js -c example.shopify.json -f -v",
+    "doc.starwars": "node bin/graphqldoc.js -c example.starWars.json -f -v",
+    "doc.starwars-js": "node bin/graphqldoc.js -c example.starWars-js.json -f -v",
     "test": "./node_modules/.bin/jest"
   },
   "repository": {
@@ -24,6 +24,8 @@
   "keywords": [
     "graphql",
     "graphdoc",
+    "graphqldoc",
+    "docs",
     "documentation"
   ],
   "author": "Michael Newman <michaeleugenenewman@gmail.com>",
@@ -63,13 +65,5 @@
     "slug": "^0.9.1",
     "striptags": "^3.1.1",
     "word-wrap": "^1.2.1"
-  },
-  "graphdoc": {
-    "ga": "UA-54154153-2",
-    "graphiql": "https://developer.github.com/early-access/graphql/explorer/",
-    "logo": "<a href=\"https://developer.github.com/early-access/graphql\" target=\"_blank\" style=\"display:block;padding:1rem 3rem\"><img src=\"https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png\" /></a>",
-    "schemaFile": "./test/github.json",
-    "output": "./gh-pages/github",
-    "baseUrl": "./"
   }
 }

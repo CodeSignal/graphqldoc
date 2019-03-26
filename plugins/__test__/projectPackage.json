@@ -2,8 +2,8 @@
   "name": "project-example",
   "version": "x.x.x",
   "description": "Example project",
-  "author": "Fede Ramirez <i@2fd.me>",
-  "graphdoc": {
+  "author": "",
+  "graphqldoc": {
     "baseUrl": "/",
     "force": true,
     "verbose": true

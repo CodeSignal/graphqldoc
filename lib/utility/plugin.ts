@@ -33,14 +33,14 @@ export abstract class Plugin implements PluginInterface, PluginImplementedInterf
     }
 
     static async collectNavigations(plugins: PluginInterface[], buildForType?: string): Promise<NavigationSectionInterface[]> {
-        
+
         const navigationCollection = await Promise
             .all<NavigationSectionInterface[]>(plugins.map(plugin => {
                 return plugin.getNavigations ?
                     plugin.getNavigations(buildForType) :
                     null as any;
             }))
-        
+
         return Plugin.collect(navigationCollection)
     }
 
@@ -96,7 +96,7 @@ export abstract class Plugin implements PluginInterface, PluginImplementedInterf
     constructor(
         public document: Schema,
         public projectPackage: any,
-        public graphdocPackage: any,
+        public graphqldocPackage: any,
     ) {
 
         this.document.types = this.document.types ?
@@ -127,7 +127,7 @@ export abstract class Plugin implements PluginInterface, PluginImplementedInterf
     }
 
     url(type: TypeRef): string {
-        return url.resolve(this.projectPackage.graphdoc.baseUrl, getFilenameOf(type));
+        return url.resolve(this.projectPackage.graphqldoc.baseUrl, getFilenameOf(type));
     }
 }
 

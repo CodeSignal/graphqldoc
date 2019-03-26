@@ -22,7 +22,7 @@ export type TemplateData = {
     navigations: NavigationSectionInterface[],
     documents: DocumentSectionInterface[],
     projectPackage: any,
-    graphdocPackage: any,
+    graphqldocPackage: any,
     slug: typeof slugTemplate,
 };
 
@@ -32,7 +32,7 @@ type Docs = DocumentSectionInterface[];
 
 export async function createData(
     projectPackage: any,
-    graphdocPackage: any,
+    graphqldocPackage: any,
     plugins: PluginInterface[],
     type?: TypeRef
 ): Promise<TemplateData> {
@@ -45,7 +45,7 @@ export async function createData(
     ]);
 
     const title = name ||
-        projectPackage.graphdoc.title ||
+        projectPackage.graphqldoc.title ||
         'Graphql schema documentation';
 
     const description = type ?
@@ -60,7 +60,7 @@ export async function createData(
         navigations,
         documents,
         projectPackage,
-        graphdocPackage,
+        graphqldocPackage,
         slug: slugTemplate
     };
 }

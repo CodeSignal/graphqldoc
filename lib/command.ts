@@ -25,7 +25,7 @@ import {
     OutputInterface
 } from '@2fd/command';
 
-const graphdocPakageJSON = require(path.resolve(__dirname, '../package.json'));
+const graphqldocPackageJson = require(path.resolve(__dirname, '../package.json'));
 
 export type Params = {};
 
@@ -50,14 +50,14 @@ export type Partials = {
 };
 
 export type ProjectPackage = {
-    graphdoc: Flags
+    graphqldoc: Flags
 };
 
 export type Input = InputInterface<Flags, Params>;
 
 export class GraphQLDocumentor extends Command<Flags, Params> {
 
-    description = graphdocPakageJSON.description + ' v' + graphdocPakageJSON.version;
+    description = graphqldocPackageJson.description + ' v' + graphqldocPackageJson.version;
 
     params = new NoParams();
 
@@ -67,14 +67,14 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
         new ListValueFlag('headers', ['-x', '--header'], 'HTTP header for request (use with --endpoint). ["Authorization: Token cb8795e7"].'),
         new ListValueFlag('queries', ['-q', '--query'], 'HTTP querystring for request (use with --endpoint) ["token=cb8795e7"].'),
         new ValueFlag('schemaFile', ['-s', '--schema', '--schema-file'], 'Graphql Schema file ["./schema.json"].'),
-        new ListValueFlag('plugins', ['-p', '--plugin'], 'Use plugins [default=graphdoc/plugins/default].'),
-        new ValueFlag('template', ['-t', '--template'], 'Use template [default=graphdoc/template/slds].'),
+        new ListValueFlag('plugins', ['-p', '--plugin'], 'Use plugins [default=graphqldoc/plugins/default].'),
+        new ValueFlag('template', ['-t', '--template'], 'Use template [default=graphqldoc/template/slds].'),
         new ValueFlag('output', ['-o', '--output'], 'Output directory.'),
         new ValueFlag('data', ['-d', '--data'], 'Inject custom data.', JSON.parse, {}),
         new ValueFlag('baseUrl', ['-b', '--base-url'], 'Base url for templates.'),
         new BooleanFlag('force', ['-f', '--force'], 'Delete outputDirectory if exists.'),
         new BooleanFlag('verbose', ['-v', '--verbose'], 'Output more information.'),
-        new BooleanFlag('version', ['-V', '--version'], 'Show graphdoc version.'),
+        new BooleanFlag('version', ['-V', '--version'], 'Show graphqldoc version.'),
     ];
 
     async action(input: Input, out: OutputInterface) {
@@ -84,7 +84,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
         try {
 
             if (input.flags.version)
-                return output.out.log('graphdoc v%s', graphdocPakageJSON.version);
+                return output.out.log('graphqldoc v%s', graphqldocPackageJson.version);
 
             // Load project info
             const projectPackageJSON: ProjectPackage = await this.getProjectPackage(input);
@@ -94,13 +94,13 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
 
             // Load plugins
             const plugins: PluginInterface[] = this.getPluginInstances(
-                projectPackageJSON.graphdoc.plugins,
+                projectPackageJSON.graphqldoc.plugins,
                 schema,
                 projectPackageJSON,
-                graphdocPakageJSON
+                graphqldocPackageJson
             );
 
-            projectPackageJSON.graphdoc.plugins
+            projectPackageJSON.graphqldoc.plugins
                 .forEach(plugin => output.info('use plugin', plugin));
 
 
@@ -112,23 +112,23 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
             // Ensure Ourput directory
             output.info('output directory', path.relative(
                 process.cwd(),
-                projectPackageJSON.graphdoc.output)
+                projectPackageJSON.graphqldoc.output)
             );
             await this.ensureOutputDirectory(
-                projectPackageJSON.graphdoc.output,
-                projectPackageJSON.graphdoc.force
+                projectPackageJSON.graphqldoc.output,
+                projectPackageJSON.graphqldoc.force
             );
 
             // Create Ourput directory
             await createBuildDirectory(
-                projectPackageJSON.graphdoc.output,
-                projectPackageJSON.graphdoc.template,
+                projectPackageJSON.graphqldoc.output,
+                projectPackageJSON.graphqldoc.template,
                 assets
             );
 
             // Collect partials
             const partials: Partials = await this.getTemplatePartials(
-                projectPackageJSON.graphdoc.template
+                projectPackageJSON.graphqldoc.template
             );
             // Render index.html
             output.info('render', 'index');
@@ -186,7 +186,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
 
     getProjectPackage(input: Input) {
 
-        let packageJSON: any & { graphdoc: any };
+        let packageJSON: any & { graphqldoc: any };
 
         try {
             packageJSON = require(path.resolve(input.flags.configFile));
@@ -194,22 +194,22 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
             packageJSON = {};
         }
 
-        packageJSON.graphdoc = Object.assign(packageJSON.graphdoc || {}, input.flags);
+        packageJSON.graphqldoc = Object.assign(packageJSON.graphqldoc || {}, input.flags);
 
-        if (packageJSON.graphdoc.data) {
-            const data = packageJSON.graphdoc.data;
-            packageJSON.graphdoc = Object.assign(data, packageJSON.graphdoc);
+        if (packageJSON.graphqldoc.data) {
+            const data = packageJSON.graphqldoc.data;
+            packageJSON.graphqldoc = Object.assign(data, packageJSON.graphqldoc);
         }
 
-        if (packageJSON.graphdoc.plugins.length === 0)
-            packageJSON.graphdoc.plugins = ['graphdoc/plugins/default'];
+        if (packageJSON.graphqldoc.plugins.length === 0)
+            packageJSON.graphqldoc.plugins = ['graphqldoc/plugins/default'];
 
-        packageJSON.graphdoc.baseUrl = packageJSON.graphdoc.baseUrl || './';
-        packageJSON.graphdoc.template = resolve(packageJSON.graphdoc.template || 'graphdoc/template/slds');
-        packageJSON.graphdoc.output = path.resolve(packageJSON.graphdoc.output);
-        packageJSON.graphdoc.version = graphdocPakageJSON.version;
+        packageJSON.graphqldoc.baseUrl = packageJSON.graphqldoc.baseUrl || './';
+        packageJSON.graphqldoc.template = resolve(packageJSON.graphqldoc.template || 'graphqldoc/template/slds');
+        packageJSON.graphqldoc.output = path.resolve(packageJSON.graphqldoc.output);
+        packageJSON.graphqldoc.version = graphqldocPackageJson.version;
 
-        if (!packageJSON.graphdoc.output)
+        if (!packageJSON.graphqldoc.output)
             return Promise.reject(
                 new Error('Flag output (-o, --output) is required')
             );
@@ -217,7 +217,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
         return Promise.resolve(packageJSON);
     }
 
-    getPluginInstances(paths: string[], schema: Schema, projectPackageJSON: object, graphdocPakageJSON: object): PluginInterface[] {
+    getPluginInstances(paths: string[], schema: Schema, projectPackageJSON: object, graphqldocPackageJson: object): PluginInterface[] {
         return paths
             .map(path => {
                 const absolutePaths = resolve(path);
@@ -225,7 +225,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
 
                 return typeof Plugin === 'function' ?
                     // plugins as contructor
-                    new Plugin(schema, projectPackageJSON, graphdocPakageJSON) :
+                    new Plugin(schema, projectPackageJSON, graphqldocPackageJson) :
                     // plugins plain object
                     Plugin;
             });
@@ -258,26 +258,26 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
 
     async getSchema(projectPackage: ProjectPackage): Promise<Schema> {
 
-        if (projectPackage.graphdoc.schemaFile) {
-            const schemaFileExt = path.extname(projectPackage.graphdoc.schemaFile);
+        if (projectPackage.graphqldoc.schemaFile) {
+            const schemaFileExt = path.extname(projectPackage.graphqldoc.schemaFile);
             switch (schemaFileExt) {
                 case '.json':
-                    return jsonSchemaLoader(projectPackage.graphdoc);
+                    return jsonSchemaLoader(projectPackage.graphqldoc);
                 case '.gql':
                 case '.gqls':
                 case '.graphqls':
                 case '.graphql':
-                    return idlSchemaLoader(projectPackage.graphdoc);
+                    return idlSchemaLoader(projectPackage.graphqldoc);
                 case '.js':
-                    return jsSchemaLoader(projectPackage.graphdoc);
+                    return jsSchemaLoader(projectPackage.graphqldoc);
                 default:
                     return Promise.reject(new Error(
                         'Unexpected schema extension name: ' + schemaFileExt
                     ));
             }
 
-        } else if (projectPackage.graphdoc.endpoint) {
-            return httpSchemaLoader(projectPackage.graphdoc);
+        } else if (projectPackage.graphqldoc.endpoint) {
+            return httpSchemaLoader(projectPackage.graphqldoc);
 
         } else {
             return Promise.reject(
@@ -287,9 +287,9 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
     }
 
     async renderFile(projectPackageJSON: ProjectPackage, partials: Partials, plugins: PluginInterface[], type?: TypeRef) {
-        const templateData = await createData(projectPackageJSON, graphdocPakageJSON, plugins, type);
+        const templateData = await createData(projectPackageJSON, graphqldocPackageJson, plugins, type);
         const file = type ? getFilenameOf(type) : 'index.html';
-        const filepath = path.resolve(projectPackageJSON.graphdoc.output, file);
+        const filepath = path.resolve(projectPackageJSON.graphqldoc.output, file);
         return await writeFile(filepath, render(partials.index, templateData, partials));
     }
 }
