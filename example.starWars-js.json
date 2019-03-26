@@ -2,7 +2,7 @@
   "name": "graphql-star-wars-js",
   "version": "1.2.0",
   "description": "Static page generator for documenting GraphQL Schema",
-  "homepage": "https://github.com/menewman/graphqldoc",
+  "homepage": "https://github.com/CodeSignal/graphqldoc",
   "graphqldoc": {
     "ga": "UA-54154153-2",
     "schemaFile": "./test/starWars.js",

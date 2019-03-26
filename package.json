@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/menewman/graphqldoc.git"
+    "url": "git+https://github.com/CodeSignal/graphqldoc.git"
   },
   "keywords": [
     "graphql",
@@ -28,12 +28,11 @@
     "docs",
     "documentation"
   ],
-  "author": "Michael Newman <michaeleugenenewman@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/menewman/graphqldoc/issues"
+    "url": "https://github.com/CodeSignal/graphqldoc/issues"
   },
-  "homepage": "https://github.com/menewman/graphqldoc#readme",
+  "homepage": "https://github.com/CodeSignal/graphqldoc#readme",
   "devDependencies": {
     "@salesforce-ux/design-system": "2.2.1",
     "@types/bluebird": "~3.0.0",

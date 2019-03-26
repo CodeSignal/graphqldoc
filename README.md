@@ -100,7 +100,7 @@ And execute
 In graphqldoc a plugin is simply an object that controls the content that is displayed
 on every page of your document.
 
-This object should only implement the [`PluginInterface`](https://github.com/menewman/graphqldoc/blob/master/lib/interface.d.ts#L12-L117).
+This object should only implement the [`PluginInterface`](https://github.com/CodeSignal/graphqldoc/blob/master/lib/interface.d.ts#L12-L117).
 
 ### Make a Plugin
 
