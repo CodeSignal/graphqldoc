@@ -1,6 +1,6 @@
 {
   "name": "graphqldoc",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Generate GraphQL docs from schema.",
   "main": "bin/graphqldoc",
   "bin": {
