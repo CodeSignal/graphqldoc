@@ -49,7 +49,7 @@
     "chai": "^4.2.0",
     "handlebars": "^4.0.10",
     "jest": "^18.1.0",
-    "node-sass": "^3.8.0",
+    "node-sass": "^4.11.0",
     "typescript": "~2.3.0"
   },
   "dependencies": {
