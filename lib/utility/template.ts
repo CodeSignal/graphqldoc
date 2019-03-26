@@ -15,7 +15,8 @@ import {
 }
 
 export type TemplateData = {
-    title: string,
+    tabTitle: string,
+    headerTitle: string,
     type?: TypeRef,
     description: string,
     headers: string,
@@ -36,7 +37,6 @@ export async function createData(
     plugins: PluginInterface[],
     type?: TypeRef
 ): Promise<TemplateData> {
-
     const name = type && type.name;
     const [headers, navigations, documents]: [Headers, Navs, Docs] = await Promise.all([
         Plugin.collectHeaders(plugins, name),
@@ -44,16 +44,25 @@ export async function createData(
         Plugin.collectDocuments(plugins, name),
     ]);
 
-    const title = name ||
-        projectPackage.graphqldoc.title ||
-        'Graphql schema documentation';
+    const packageTitle = projectPackage.graphqldoc.title;
+    let tabTitle = 'GraphQL Schema Documentation';
+    let headerTitle = tabTitle;
+
+    if (name && packageTitle) {
+        tabTitle = `${name} | ${projectPackage.graphqldoc.title}`;
+        headerTitle = name;
+    } else if (name || packageTitle) {
+        tabTitle = name || packageTitle;
+        headerTitle = tabTitle;
+    }
 
     const description = type ?
         marked(type.description || '') :
         projectPackage.description;
 
     return {
-        title,
+        tabTitle,
+        headerTitle,
         type,
         description,
         headers: headers.join(''),
