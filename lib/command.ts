@@ -2,7 +2,6 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import { render } from 'mustache';
-import * as deepmerge from 'deepmerge';
 import { Output, Plugin, getFilenameOf, createData } from './utility';
 import { readFile, writeFile, createBuildDirectory, resolve, removeBuildDirectory } from './utility/fs';
 import {
@@ -186,6 +185,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
     }
 
     getProjectPackage(input: Input) {
+
         let packageJSON: any & { graphqldoc: any };
 
         try {
@@ -194,11 +194,11 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
             packageJSON = {};
         }
 
-        packageJSON.graphqldoc = deepmerge(input.flags, packageJSON.graphqldoc || {});
+        packageJSON.graphqldoc = Object.assign(packageJSON.graphqldoc || {}, input.flags);
 
         if (packageJSON.graphqldoc.data) {
             const data = packageJSON.graphqldoc.data;
-            packageJSON.graphqldoc = deepmerge(data, packageJSON.graphqldoc);
+            packageJSON.graphqldoc = Object.assign(data, packageJSON.graphqldoc);
         }
 
         if (packageJSON.graphqldoc.plugins.length === 0)
