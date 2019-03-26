@@ -1,23 +1,23 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2016",
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "module": "commonjs",
         "lib": [
-            "es5",
-            "es2015",
-            "es2015.core",
-            "scripthost"
+            "es2017",
+            "es2018",
+            "esnext"
         ],
         "types": [
             "node",
             "jest"
         ],
         "strictNullChecks": true,
-        "sourceMap": false
+        "sourceMap": false,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules",

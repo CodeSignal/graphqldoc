@@ -17,6 +17,7 @@ import { getFilenameOf } from './introspection';
 /**
  * Plugin Base implementation
  */
+// @ts-ignore
 export abstract class Plugin implements PluginInterface, PluginImplementedInterface {
 
     static collect<T>(collection: T[][]): T[] {

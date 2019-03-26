@@ -16,6 +16,7 @@ import {
     Schema,
     TypeRef,
 } from './interface';
+
 import {
     Command,
     NoParams,
@@ -186,7 +187,6 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
     }
 
     getProjectPackage(input: Input) {
-
         let packageJSON: any & { graphqldoc: any };
 
         try {
