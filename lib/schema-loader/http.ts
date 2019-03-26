@@ -2,7 +2,7 @@ import * as Bluebird from 'bluebird';
 import * as request from 'request';
 
 import { Introspection, Schema, SchemaLoader } from '../interface';
-
+import { getSchemaFromIntrospection } from './introspectionParser';
 import { query as introspectionQuery } from '../utility';
 
 export type THttpSchemaLoaderOptions = {
@@ -30,7 +30,7 @@ async function r(options: request.OptionsWithUrl) {
                     'Unexpected response from "' + options.url + '": ' + body.slice(0, 10) + '...'
                 ));
 
-            return resolve(body.data.__schema);
+            return resolve(getSchemaFromIntrospection(body));
         });
     });
 }

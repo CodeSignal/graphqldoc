@@ -1,4 +1,5 @@
 import { Introspection, SchemaLoader } from '../interface';
+import { getSchemaFromIntrospection } from './introspectionParser';
 import { buildSchema, execute, parse } from 'graphql';
 
 import { query as introspectionQuery } from '../utility';
@@ -36,5 +37,5 @@ export const jsSchemaLoader: SchemaLoader = async function (options: TJsSchemaLo
         parse(introspectionQuery)
     ) as Introspection;
 
-    return introspection.data.__schema;
+    return getSchemaFromIntrospection(introspection);
 };

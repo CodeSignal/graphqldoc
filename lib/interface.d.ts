@@ -148,11 +148,15 @@ type refToUrl = (typeName: TypeRef) => string;
 /**
  * Introspection types
  */
-type Introspection = {
-    data: {
-        __schema: Schema
-    }
+type RawIntrospection = {
+    __schema: Schema
 }
+
+type WrappedIntrospection = {
+    data: RawIntrospection
+};
+
+type Introspection = RawIntrospection | WrappedIntrospection;
 
 type Schema = {
     queryType: Description,

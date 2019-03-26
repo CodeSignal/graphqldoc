@@ -1,5 +1,6 @@
 import { SchemaLoader, Introspection } from '../interface';
 import { query as introspectionQuery } from '../utility';
+import { getSchemaFromIntrospection } from './introspectionParser';
 import { resolve } from 'path';
 import { readFile } from '../utility/fs';
 import { buildSchema, parse, execute } from 'graphql';
@@ -17,5 +18,5 @@ export const idlSchemaLoader: SchemaLoader = async function (options: TIDLSchema
         parse(introspectionQuery)
     ) as Introspection;
 
-    return introspection.data.__schema;
+    return getSchemaFromIntrospection(introspection);
 };

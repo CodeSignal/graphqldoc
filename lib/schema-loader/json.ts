@@ -1,4 +1,5 @@
 import { SchemaLoader, Introspection } from '../interface';
+import { getSchemaFromIntrospection } from './introspectionParser';
 import { resolve } from 'path';
 
 export type TJsonSchemaLoaderOptions = {
@@ -9,8 +10,8 @@ export const jsonSchemaLoader: SchemaLoader = function (options: TJsonSchemaLoad
     try {
         const schemaPath = resolve(options.schemaFile);
         const introspection: Introspection = require(schemaPath);
-        return Promise.resolve(introspection.data.__schema);
 
+        return Promise.resolve(getSchemaFromIntrospection(introspection))
     } catch (err) {
         return Promise.reject(err);
     }
