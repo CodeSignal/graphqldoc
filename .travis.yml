@@ -8,7 +8,6 @@ install:
   - npm install
   - npm run compile
 before_script:
-  - npm prune --production
   - mkdir gh-pages
   - npm run doc.github
   - npm run doc.shopify
