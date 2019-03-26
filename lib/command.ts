@@ -111,7 +111,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
             assets
                 .forEach(asset => output.info('use asset', path.relative(process.cwd(), asset)));
 
-            // Ensure Ourput directory
+            // Ensure Output directory
             output.info('output directory', path.relative(
                 process.cwd(),
                 projectPackageJSON.graphqldoc.output)
@@ -121,7 +121,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
                 projectPackageJSON.graphqldoc.force
             );
 
-            // Create Ourput directory
+            // Create Output directory
             await createBuildDirectory(
                 projectPackageJSON.graphqldoc.output,
                 projectPackageJSON.graphqldoc.template,
@@ -132,6 +132,7 @@ export class GraphQLDocumentor extends Command<Flags, Params> {
             const partials: Partials = await this.getTemplatePartials(
                 projectPackageJSON.graphqldoc.template
             );
+
             // Render index.html
             output.info('render', 'index');
             await this.renderFile(
