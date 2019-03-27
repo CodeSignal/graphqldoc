@@ -105,13 +105,12 @@ export default class RequireByPlugin extends Plugin implements PluginInterface {
             '<a href="' + this.url(type) + '" title="' +
             type.name + ' - ' + striptags(type.description).replace(/"/gi, '&quot;') +
             '">' +
-            type.name + '<em>' + type.description + '</em>' +
+            type.name + '<em>' + (type.description || '') + '</em>' +
             '</a>' +
             '<li>';
     }
 
     getDocuments(buildForType?: string): DocumentSectionInterface[] {
-
         if (!buildForType)
             return [];
 
