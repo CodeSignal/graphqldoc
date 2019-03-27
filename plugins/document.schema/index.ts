@@ -150,22 +150,21 @@ export default class SchemaPlugin extends Plugin implements PluginInterface {
     }
 
     argumentDescription(arg: InputValue): string[] {
-
-        const desc = arg.description === null ?
+        const desc = !arg.description ?
             '[' + this.html.highlight('Not documented') + ']' : arg.description;
 
         return this.description(this.html.highlight(arg.name) + ': ' + desc);
     }
 
     argumentsDescription(fieldOrDirectives: Field | Directive): string[] {
-
-        if (fieldOrDirectives.args.length === 0) {
+        const argsWithDescriptions = fieldOrDirectives.args.filter(arg => arg.description);
+        if (argsWithDescriptions.length === 0) {
             return [];
         }
 
         const reduceArguments = (descriptions: string[], arg: InputValue) => descriptions.concat(this.argumentDescription(arg));
 
-        return fieldOrDirectives.args
+        return argsWithDescriptions
             .reduce(reduceArguments, [this.html.comment('Arguments')]);
     }
 
