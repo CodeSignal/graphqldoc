@@ -18,11 +18,11 @@
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/button-groups/index',
 
   // // Button
-  '../../../node_modules/@salesforce-ux/design-system/scss/components/buttons/flavors/base/index',
-  '../../../node_modules/@salesforce-ux/design-system/scss/components/buttons/flavors/stateful/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/buttons/base/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/buttons/stateful/index',
 
   // // Button Icon
-  '../../../node_modules/@salesforce-ux/design-system/scss/components/button-icons/flavors/base/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/button-icons/base/index',
 
   // // Icons
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/icons/index',
@@ -33,8 +33,9 @@
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/cards/index',
 
   // // Forms
-  '../../../node_modules/@salesforce-ux/design-system/scss/components/forms/index',
-  '../../../node_modules/@salesforce-ux/design-system/scss/components/forms/flavors/input/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/input/base/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/form-element/base/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/form-layout/base/index',
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/forms/flavors/textarea/index',
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/forms/flavors/radio/index',
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/forms/flavors/radio-group-alternate/index',
@@ -148,7 +149,9 @@
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/tabs/flavors/scrolling/index',
 
   // // Navigation
-  '../../../node_modules/@salesforce-ux/design-system/scss/components/navigation/flavors/vertical/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/vertical-navigation/expandable-section/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/vertical-navigation/list/index',
+  '../../../node_modules/@salesforce-ux/design-system/scss/components/vertical-navigation/quickfind/index',
 
   // // Notifications -- Toasts & Alerts
   // '../../../node_modules/@salesforce-ux/design-system/scss/components/notifications/index',
