@@ -15,7 +15,7 @@ before_script:
   - npm test
 
 script:
-  - node sass
+  - npm run sass
   - mkdir gh-pages
   - npm run doc.github
   - npm run doc.pokemon
